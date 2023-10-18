@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  border-radius: 100 px;
+  min-height: 100vh;
+}
+
+header {
+  padding: 1rem;
+  background-color: #fff;
+}
+
+main {
+  flex: 1;
+  padding: 1rem;
+}
+
+footer {
+  padding: 1rem;
+  background-color: #f6f6f6;
+}
+
+.welcome-back {
+  text-align: center;
+}
+
+.welcome-back h1 {
+  font-size: 2rem;
+  margin-bottom: 0;
+}
+
+
+
+.welcome-back h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-top: 0;
+}
+
+
+.welcome-back form {
+  margin-top: 1rem;
+}
+
+.welcome-back input {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.sso-input-green{
+  border-color: #a8c4b8;
+}
+
+.sso-text-green{
+  color: #a8c4b8;
+}
+
+.welcome-back button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #000;
+  color: #fff;
+  border-radius: 0.5rem;
+}
+
+.social-buttons {
+  text-align: center;
+}
+
+.social-buttons a {
+  padding: 0.5rem;
+}
+
+.social-buttons img {
+  width: 32px;
+  height: 32px;
+}
+/* :root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+} */
