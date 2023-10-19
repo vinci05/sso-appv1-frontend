@@ -61,14 +61,14 @@ export default function Home() {
                 src={adminSiteImg}
                 alt="Admin Site"
               />
-              <h1 className="my-24" style={{ fontFamily: "Montserrat", fontWeight: "normal" }}>
+              <h1 className="my-24 font-thin">
                 AdminSite
               </h1>
             </div>
-            <h2 className="pt-16" style={{ fontFamily: "Montserrat" }}>
+            <h2 className="pt-16 font-bold" >
               Welcome Back
             </h2>
-            <p className="pb-4" style={{ color: '#A8C4B8', fontFamily: "Montserrat" }}>
+            <p className="pb-4" style={{ color: '#A8C4B8'}}>
               Welcome Back, Please enter your details
             </p>
             <div className="flex h-12 justify-center">
