@@ -7,6 +7,10 @@ import userIcon from 'public/tdesign-user-7aG.png';
 import passwordIcon from 'public/solar-lock-password-linear-RUC.png';
 import successIcon from 'public/ep-success-filled-U24.png';
 import adminSiteImg from 'public/simple-icons-phpmyadmin.png';
+import { useRouter } from 'next/router';
+import { useCookies } from 'react-cookie';
+
+
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -15,6 +19,10 @@ export default function Home() {
   const [password, setPassword] = useState('');
   const [validationStatus, setValidationStatus] = useState(null);
   const [isPasswordValid, setisPasswordValid] = useState(null);
+  const [cookie, setCookie, removeCookie] = useCookies();
+  const [status, setStatus] = useState("Continue");
+  const [color, setColor] = useState({ background: "#32D3EC" })
+  const router = useRouter();
 
   const validateUser = () => {
     const isValid = userName.length > 1 ? true : false;
@@ -33,22 +41,51 @@ export default function Home() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (validationStatus && password.length < 1) {
+     if (validationStatus && password.length < 1) {
       setisPasswordValid(false);
     }
     if (validationStatus && password.length > 1) {
-      console.log('LoggedIn Successfully!');
-      console.log('User Name Entered:', userName);
-      console.log('Password Entered:', password);
-      setUserName('');
-      setPassword('');
-      setisPasswordValid(null);
-      setValidationStatus(null);
+        let headers = {
+          'Content-Type':'application/json',
+          'Accept':'application/json'
+        }
+
+        let body = JSON.stringify({username:userName,password: password})
+
+        const loggedIn = await fetch('https://ctsadminbackend--niranjan011003.repl.co/login', {method:'POST', headers:headers, body: body})
+        if(loggedIn.status == 200) {
+          const data =  await loggedIn.json()
+          console.log(data)
+          if(data.message === "User not found.") {
+            setStatus(data.message)
+            setColor({ background: "#FF6969" })
+          }
+          else {
+            console.log(data)
+            removeCookie("token");
+            setCookie('id', data._id)
+            router.replace("/dashboard");
+          }
+        }
     }
   };
+
+  function handleMail(value) {
+    setUserName(value)
+    console.log(status)
+    color.background === "#FF6969" ? setColor({background:"#32D3EC"}) : null
+    status === "User not found." ? setStatus("Continue") : null
+  }
+
+  function handlePass(value) {
+    setPassword(value)``
+    color.background === "#FF6969" ? setColor({background:"#32D3EC"}) : null
+    status === "User not found." ? setStatus("Continue") : null
+
+  }
 
   return (
     <Layout>
