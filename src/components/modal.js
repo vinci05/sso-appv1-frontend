@@ -6,7 +6,7 @@ import QRCode from 'qrcode.react';
 import GoogleAuth from 'public/GoogleAuth.svg'
 import { useRouter  } from 'next/router';
 import speakeasy from 'speakeasy'
-import { useAppContext } from '@/pages/context';
+import { useAppContext } from '@/components/context';
 
 ReactModal.setAppElement('#__next');
 

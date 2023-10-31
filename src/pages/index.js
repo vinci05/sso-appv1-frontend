@@ -10,7 +10,7 @@ import adminSiteImg from 'public/simple-icons-phpmyadmin.png';
 import { useRouter } from 'next/router';
 import { useCookies } from 'react-cookie';
 import MyModal from '@/components/modal';
-import { AppProvider, useAppContext } from './context';
+import { AppProvider, useAppContext } from '../components/context';
 
 
 
