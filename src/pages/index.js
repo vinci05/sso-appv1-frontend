@@ -9,12 +9,20 @@ import successIcon from 'public/ep-success-filled-U24.png';
 import adminSiteImg from 'public/simple-icons-phpmyadmin.png';
 import { useRouter } from 'next/router';
 import { useCookies } from 'react-cookie';
+import MyModal from '@/components/modal';
+import { AppProvider, useAppContext } from './context';
+
 
 
 
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
+
+  const{ isModalOpen, openModal, closeModal, verificationToast, setVerificationToast } = useAppContext();
+
+ 
+
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [validationStatus, setValidationStatus] = useState(null);
@@ -55,6 +63,7 @@ export default function Home() {
 
         let body = JSON.stringify({username:userName,password: password})
 
+        //openModal();
         const loggedIn = await fetch('https://ctsadminbackend--niranjan011003.repl.co/login', {method:'POST', headers:headers, body: body})
         if(loggedIn.status == 200) {
           const data =  await loggedIn.json()
@@ -67,11 +76,14 @@ export default function Home() {
             console.log(data)
             removeCookie("token");
             setCookie('id', data._id)
-            router.replace("/dashboard");
+            openModal();
+            //router.replace("/dashboard");
           }
         }
     }
   };
+
+
 
   function handleMail(value) {
     setUserName(value)
@@ -132,8 +144,8 @@ export default function Home() {
                     <div className="border-l-2 ml-4 h-6" style={{ color: "#A8C4B8" }}></div>
                   </div>
                   <input
-                    type="Username"
-                    placeholder="User Name"
+                    type='email'
+                    placeholder="Email"
                     value={userName}
                     onChange={(e) => setUserName(e.target.value)}
                     onBlur={validateUser}
@@ -175,9 +187,11 @@ export default function Home() {
                     /> : "" 
                   }
                 </div>
-                <button style={{ background: "#32D3EC" }} className="w-full focus:outline-none" type="submit">
+                <button style={{ background: "#32D3EC" }} className="w-full focus:outline-none" type="submit" >
                   Continue
                 </button>
+                {/* <button onClick={openModal}>Open Dialog</button> */}
+                <MyModal isOpen={isModalOpen} onRequestClose={closeModal} />
               </form>
             </div>
           </div>
@@ -186,6 +200,7 @@ export default function Home() {
           <Image className="object-cover w-full h-full rounded-lg" src={myImage} alt="Image Description" />
         </div>
       </div>
-    </Layout>
+      
+    </Layout>    
   );
 }
